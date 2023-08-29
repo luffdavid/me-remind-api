@@ -6,6 +6,7 @@ Content-Type: application/json
 
 {
     "text" : "new todo 2",
+    "dueDate": "30.08.2023",
     "completed":true
 }
 

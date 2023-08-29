@@ -40,7 +40,8 @@ app.get('/todos', async(req, res) => {
 app.post('/todo/new', async (req, res, next) => {
    try {
     const todo = new Todo({
-        text : req.body.text
+        text : req.body.text,
+        dueDate: req.body.dueDate
     });
    await todo.save();
    res.json(todo);
@@ -77,6 +78,7 @@ app.put('/todo/update/:id', async (req, res) => {
     const todo = await Todo.findById(req.params.id);
 
 	todo.text = req.body.text;
+  todo.dueDate = req.body.dueDate;
 
 	todo.save();
 
