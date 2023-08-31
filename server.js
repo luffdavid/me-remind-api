@@ -33,7 +33,7 @@ app.get('/todos', async(req, res) => {
         const todos = await Todo.find();
         res.json(todos);
       } catch (error) {
-        next(error); // Weiterleitung an Fehlerbehandlung
+        console.error(error); // Weiterleitung an Fehlerbehandlung
       }
   });
 
@@ -47,7 +47,7 @@ app.post('/todo/new', async (req, res, next) => {
    await todo.save();
    res.json(todo);
 } catch(error) {
-    next(error);
+    console.error(error);
 }
 });
 
@@ -56,7 +56,7 @@ app.delete('/todo/delete/:id', async (req, res, next) => {
       const result = await Todo.findByIdAndDelete(req.params.id);
       res.json({ result });
     } catch (error) {
-      next(error); // Weiterleitung an Fehlerbehandlung
+      console.error(error); // Weiterleitung an Fehlerbehandlung
     }
 });
 
@@ -70,7 +70,7 @@ app.get('/todo/complete/:id', async (req, res) => {
 
 	res.json(todo);
 } catch (error) {
-    next(error); // Weiterleitung an Fehlerbehandlung
+    console.error(error); // Weiterleitung an Fehlerbehandlung
   }
 })
 
@@ -86,7 +86,7 @@ app.put('/todo/update/:id', async (req, res) => {
 
 	res.json(todo);
     } catch (error){
-        next(error)
+        console.error(error);
     }
 });
 
