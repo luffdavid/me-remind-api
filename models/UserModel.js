@@ -52,7 +52,7 @@ userSchema.statics.login = async function ( email, password) {
     throw Error('Error: All fields must be filled')
   }
 
-  const user = await this.findOne({ email })
+  const user = await this.findOne({ email})
   if (!user) {
     throw Error('Error: Incorrect email')
   }
