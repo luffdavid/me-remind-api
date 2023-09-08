@@ -17,4 +17,23 @@ DELETE http://localhost:3001/todo/delete/64ed0bfa9da50374fe2b2689
 
 ###
 
-PUT http://localhost:3001/todo/complete/64ed0db053892f0f476bbdae
+POST http://localhost:3001/auth/signup 
+Content-Type: application/json
+
+{
+    "firstName" : "First name",
+    "lastName": "last name",
+    "email": "email@abcd.de",
+    "password": "PASSWORD"
+}
+
+###
+
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email": "email@abc.de",
+    "password": "PASSWORD"
+}
+

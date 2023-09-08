@@ -90,6 +90,59 @@ app.put('/todo/update/:id', async (req, res) => {
     }
 });
 
+const SignUp = require('./models/SignUp');
+
+app.post('/auth/signup', async (req, res, next) => {
+  try {
+    // Überprüfe, ob die E-Mail bereits in der Datenbank existiert
+    const existingUser = await SignUp.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'E-Mail existiert bereits' });
+    }
+
+    // Wenn die E-Mail noch nicht existiert, erstelle einen neuen Benutzer
+    const user = new SignUp({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Fehler bei der Registrierung' });
+  }
+});
+
+const Login = require('./models/Login');
+
+app.post('/auth/login', async (req, res, next) => {
+  try {
+    // Suchen des Benutzers anhand der E-Mail-Adresse
+    const user = await SignUp.findOne({ email: req.body.email });
+
+    // Überprüfe, ob der Benutzer existiert
+    if (!user) {
+      return res.status(401).json({ message: 'Benutzer nicht gefunden' });
+    }
+
+    // Überprüfe das Passwort
+    if (user.password !== req.body.password) {
+      return res.status(401).json({ message: 'Falsches Passwort' });
+    }
+
+    // Wenn alles erfolgreich ist, kannst du eine Erfolgsantwort senden
+    res.json({ message: 'Anmeldung erfolgreich' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Fehler bei der Anmeldung' });
+  }
+});
+
+
+
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
   });
