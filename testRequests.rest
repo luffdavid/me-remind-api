@@ -23,7 +23,7 @@ Content-Type: application/json
 {
   
     "email": "emaila@abcd.def",
-    "password": "PASSWORDa"
+    "password": "PASSWORD"
 }
 
 ###
@@ -32,7 +32,7 @@ POST http://localhost:3001/auth/user/signup
 Content-Type: application/json
 
 {
-    "email": "email",
+    "email": "emailaaa@dasdasd",
     "password": "PASSWORD",
     "firstName":"asdsad",
     "lastName": "sdasdasd"

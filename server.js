@@ -30,8 +30,10 @@ mongoose.connect(
 const Todo = require('./models/Todo');
 
 app.get('/todos', async(req, res) => {
+  const userId = req.query.userId;
+
     try {
-        const todos = await Todo.find();
+        const todos = await Todo.find({ userId });
         res.json(todos);
       } catch (error) {
         console.error(error); // Weiterleitung an Fehlerbehandlung
@@ -41,6 +43,7 @@ app.get('/todos', async(req, res) => {
 app.post('/todo/new', async (req, res, next) => {
    try {
     const todo = new Todo({
+        userId: req.body.userId,
         text : req.body.text,
         dueDate: req.body.dueDate,
         description: req.body.description

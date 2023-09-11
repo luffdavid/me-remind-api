@@ -21,6 +21,10 @@ const TodoSchema = new Schema({
     timestamp:{
         type: String,
         default: Date.now()
+    },
+    userId: {
+        type:String,
+        required: true
     }
 })
 
