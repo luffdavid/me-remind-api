@@ -8,11 +8,13 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.login(email, password)
 
+    const userId  = user._id;
      // get the user's first name and last name from the database
      const userData = await User.findById(user._id)
      const { firstName, lastName} = userData
+  
 
-    res.status(200).json({ firstName, lastName, email })
+    res.status(200).json({userId, firstName, lastName, email  })
   } catch (error) {
     res.status(400).json({error: error.message})
   }
@@ -24,8 +26,8 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.signup(firstName, lastName, email, password)
-
-    res.status(200).json({ firstName, lastName, email })
+    const userId  = user._id;
+    res.status(200).json({userId, firstName, lastName, email })
     
   } catch (error) {
     res.status(400).json({error: error.message})
