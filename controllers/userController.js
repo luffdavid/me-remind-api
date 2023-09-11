@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
      const userData = await User.findById(user._id)
      const { firstName, lastName} = userData
 
-    res.status(200).json({ firstName, lastName, email, password })
+    res.status(200).json({ firstName, lastName, email })
   } catch (error) {
     res.status(400).json({error: error.message})
   }
